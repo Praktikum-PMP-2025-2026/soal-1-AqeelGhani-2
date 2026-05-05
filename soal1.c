@@ -28,11 +28,12 @@ StackNode* CreateStackNode(char element){
 
     newNode->element = element;
     newNode->next = NULL;
+    return newNode;
 }
 
 void AddNewNode(Stack *stack, char newElement){
     StackNode *newNode = CreateStackNode(newElement);
-    if (stack->top == NULL) stack->top == newNode;
+    if (stack->top == NULL) stack->top = newNode;
     else {
         newNode->next = stack->top;
         stack->top = newNode;
@@ -52,12 +53,12 @@ void CheckPair(Stack *stack, char newElement){
     else AddNewNode(stack, newElement);
 }
 
-int CheckInput(Stack *stack, char newElement){
+int CheckInput(char newElement){
     if (newElement == '(' || newElement == ')' || newElement == '{' || newElement == '}' || newElement == '[' || newElement == ']') return 1;
     else return 0;
 }
 
-int CheckValidity(Stack *stack){
+void CheckValidity(Stack *stack){
     if (stack->top == NULL) printf("VALID");
     else printf("INVALID");
 }
@@ -68,7 +69,7 @@ int main() {
     char newElement = getchar();
     
     while (newElement != '\n' && newElement != '\0'){
-        if (CheckInput(&stack, newElement)) CheckPair(&stack, newElement);
+        if (CheckInput(newElement)) CheckPair(&stack, newElement);
         newElement = getchar();
     }
 
