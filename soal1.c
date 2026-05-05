@@ -47,7 +47,8 @@ void PopStack(Stack *stack){
 }
 
 void CheckPair(Stack *stack, char newElement){
-    if ((stack->top->element == '(' && newElement == ')')||(stack->top->element == '{' && newElement == '}')||(stack->top->element == '[' && newElement == ']')) PopStack(stack);
+    if (stack->top == NULL) AddNewNode(stack, newElement);
+    else if ((stack->top->element == '(' && newElement == ')')||(stack->top->element == '{' && newElement == '}')||(stack->top->element == '[' && newElement == ']')) PopStack(stack);
     else AddNewNode(stack, newElement);
 }
 
@@ -66,8 +67,8 @@ int main() {
     InitializeStack (&stack);
     char newElement = getchar();
     
-    while (newElement != '\n' || newElement != '\0'){
-        if (CheckInput) CheckPair(&stack, newElement);
+    while (newElement != '\n' && newElement != '\0'){
+        if (CheckInput(&stack, newElement)) CheckPair(&stack, newElement);
         newElement = getchar();
     }
 
