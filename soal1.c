@@ -66,12 +66,10 @@ void CheckValidity(Stack *stack){
 int main() {
     Stack stack;
     InitializeStack (&stack);
-    char newElement = getchar();
+    char newElement[100];
+    fgets(newElement, 100, stdin);
     
-    while (newElement != '\n' && newElement != '\0'){
-        if (CheckInput(newElement)) CheckPair(&stack, newElement);
-        newElement = getchar();
-    }
+    for(int i = 0; i<100 && newElement[i] !='\0'; i++) if (CheckInput(newElement[i])) CheckPair(&stack, newElement[i]);
 
     CheckValidity(&stack);
 
@@ -80,3 +78,4 @@ int main() {
 
 // Referensi
 // https://www.geeksforgeeks.org/c/getchar-function-in-c/
+// https://www.geeksforgeeks.org/c/fgets-function-in-c/
